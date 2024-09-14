@@ -28,8 +28,8 @@ class Command(BaseCommand):
         if not model:
             raise CommandError(f'The Model "{model_name}" not found in any app!')
             
-            with open(file_path,'r') as file:
-             reader = csv.DictReader(file)
-            for row in reader:
-                model.objects.create(**row) 
+        with open(file_path,'r') as file:
+              reader = csv.DictReader(file)
+              for row in reader:
+                 model.objects.create(**row) 
         self.stdout.write(self.style.SUCCESS("Data imported from csv file successfully"))

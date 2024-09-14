@@ -16,3 +16,6 @@ class Student(models.Model):
 class Customer(models.Model):
     customer_name = models.CharField(max_length=200)
     country = models.CharField(max_length=300)
+    
+    def __str__(self): 
+        return self.customer_name
