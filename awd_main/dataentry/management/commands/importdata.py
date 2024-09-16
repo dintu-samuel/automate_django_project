@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand,CommandError
 from django.apps import apps
 import csv
+from django.db import DataError
 
 
 
@@ -27,9 +28,14 @@ class Command(BaseCommand):
                 continue # if we not get continue to next app
         if not model:
             raise CommandError(f'The Model "{model_name}" not found in any app!')
+        
+        model_fields = [field.name for field in model._meta.fields if field.name != 'id']
             
         with open(file_path,'r') as file:
               reader = csv.DictReader(file)
+              csv_reader = reader.fieldnames
+              if csv_reader != model_fields:
+                  raise DataError(f"The csv file doesn't match with {model_name} of the table")
               for row in reader:
                  model.objects.create(**row) 
         self.stdout.write(self.style.SUCCESS("Data imported from csv file successfully"))
