@@ -22,5 +22,6 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name='home'),
+    path('celery-test/',views.celery_test,name='celery-test'),
     path('',include('dataentry.urls'))
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
