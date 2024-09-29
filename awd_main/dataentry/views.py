@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from dataentry.utils import get_all_custom_models,  check_csv_error
 from uploads.models import Upload
 from django.conf import settings
-from .task import import_data_task
+from .task import import_data_task, export_data_task
+from django.core.management import call_command
 
 from django.contrib import messages
 # Create your views here.
@@ -42,3 +43,22 @@ def importdata(request):
             'custom_model' :custom_model
         }
     return render(request,'dataentry/importdata.html',context)
+
+
+def exportdata(request):
+    if request.method == "POST":
+       model_name = request.POST.get('model_name')
+       # export data task 
+       export_data_task(model_name)
+        #show the message to the user
+       messages.success(request,"Your data is being Exported you will be notified one it is done ! ")
+       return redirect('export_data')
+    else:
+        custom_model = get_all_custom_models()
+        context = {
+            
+            'custom_model' :custom_model
+        }
+    return render(request,'dataentry/exportdata.html',context)
+   
+       

@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandParser
 from django.apps import apps
 import csv
 import datetime
-
+from dataentry.utils import generate_csv_file
 
 class Command(BaseCommand):
     
@@ -35,13 +35,7 @@ class Command(BaseCommand):
     
         data = model.objects.all()
     
-           #generate timestamp of current date and time
-    
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    
-           #define the csv file path/name
-    
-        file_path = f'exported_{model_name}_data_{timestamp}.csv'
+        file_path = generate_csv_file(model_name)
     
          #open the csv file and write
     
