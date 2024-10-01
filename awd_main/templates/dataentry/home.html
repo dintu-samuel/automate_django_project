@@ -2,7 +2,7 @@
 
 
 {% block content %}
-
+{% if user.is_authenticated %}
 <div class="container" style="padding: 50px;"></div>
     <h2 class="text-center">Automate The Boring Stuff With Django</h2>
     <div class="row pt-5">
@@ -91,6 +91,19 @@
             </a>
         </div>
     </div>
+    {% include 'alerts.html' %}
+    {% else %}
+    <div class="home-info">
+        <h2 class="text-center"> Automate the Boring Stuff with Django </h2>
+        <p class="lead text-center text-muted">"Automate the Boring Stuff with Django" is a project-based course to build various tools using the Django frame work to automate routine tasks, ranging from data processing to scheduling, and more. By leveraing Django capabilities, users can streamline their work flows saving time and 
+            enhancing productivity
+        </p>
+        <div style="display: flex; justify-content: center;">
+        <a href="{% url 'login' %}" class="btn btn-success">Login</a>
+        &nbsp;&nbsp;<a href="{% url 'register' %}" class="btn btn-primary">Register</a>
+       </div>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}
