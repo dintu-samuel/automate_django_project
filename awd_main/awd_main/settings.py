@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast = bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'ckeditor',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -154,11 +155,11 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 
 # Email configuration
 
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT', cast=int)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS =True
+# EMAIL_HOST = config('EMAIL_HOST')
+# EMAIL_PORT = config('EMAIL_PORT', cast=int)
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_TLS =True
 DEFAULT_FROM_EMAIL = 'Automate with Django<dintusamuel10@gmail.com>'
 DEFAULT_TO_EMAIL = 'dintusamuel169@gmail.com'
 
@@ -172,3 +173,14 @@ CKEDITOR_CONFIGS = {
         # 'width': 300,
     },
 }
+
+EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"
+
+ANYMAIL = {
+    # (exact settings here depend on your ESP...)
+    "SENDINBLUE_API_KEY":config ("SENDINBLUE_API_KEY"),
+}
+
+
+CSRF_TRUSTED_ORIGINS=['https://aa73-2409-40f3-100c-4140-3c52-435f-d03a-13ab.ngrok-free.app']
+BASE_URL = 'https://aa73-2409-40f3-100c-4140-3c52-435f-d03a-13ab.ngrok-free.app'

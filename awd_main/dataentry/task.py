@@ -30,7 +30,7 @@ def import_data_task(file_path, model_name ):
     mail_subject = 'Import Data Completed'
     message  = 'Your data imported successfully'
     to_email = settings.DEFAULT_TO_EMAIL
-    send_email_notification(mail_subject,message,to_email)
+    send_email_notification(mail_subject,message,[to_email])
     
     return "Data imported successfully"
 
@@ -39,14 +39,14 @@ def import_data_task(file_path, model_name ):
 @app.task
 def export_data_task(model_name):
     try:
-          call_command('exportdata', model_name)
+        call_command('exportdata', model_name)
     except Exception as e:
-           raise e
+        raise e
     file_path = generate_csv_file(model_name)
     mail_subject = 'Export Data Successfully'
     message  = 'Data Export Successfully, Please find the attachement'
     to_email = settings.DEFAULT_TO_EMAIL
-    send_email_notification(mail_subject,message,to_email, attachment=file_path)
+    send_email_notification(mail_subject,message,[to_email], attachment=file_path)
     
     return "Export Data Task Excecuted Successfully"
     
