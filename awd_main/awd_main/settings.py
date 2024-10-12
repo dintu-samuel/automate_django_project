@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'compress_image',
     'emails',
     'dataentry',
     'uploads',
@@ -182,5 +183,5 @@ ANYMAIL = {
 }
 
 
-CSRF_TRUSTED_ORIGINS=['https://aa73-2409-40f3-100c-4140-3c52-435f-d03a-13ab.ngrok-free.app']
-BASE_URL = 'https://aa73-2409-40f3-100c-4140-3c52-435f-d03a-13ab.ngrok-free.app'
+CSRF_TRUSTED_ORIGINS=['https://e2a1-2409-40f3-100c-4140-3c52-435f-d03a-13ab.ngrok-free.app']
+BASE_URL = 'https://e2a1-2409-40f3-100c-4140-3c52-435f-d03a-13ab.ngrok-free.app '
