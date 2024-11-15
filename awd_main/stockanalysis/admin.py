@@ -1,6 +1,12 @@
 from django.contrib import admin
-from .models import stock
+from .models import stock, StockData
 
 # Register your models here.
 
-admin.site.register(stock)
+
+class StockAdmin(admin.ModelAdmin):
+    
+    search_fields =('id','name','symbol')
+
+admin.site.register(stock, StockAdmin)
+admin.site.register(StockData)
